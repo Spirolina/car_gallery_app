@@ -1,0 +1,21 @@
+extends layout 
+
+block content
+    h1(class='text-center') #{title}:
+        a(href=type.url)  #{type.title}
+    hr
+    if cars.length != 0  
+        p First you need to delete cars related to this type
+        h5 Types' Cars
+        ul(class="list-group list-group-flush")
+        each car in cars 
+            li(class="list-group-item") 
+                a(href=car.url) #{car.title}
+    else 
+        form(action=type.url+'/delete', method="post")
+            div(class='card text-center')
+                div(class='card-body')
+                    h5(class='card-title') Deleting Type 
+                    p(class='card-text') Are you sure about deleting #{type.title} type
+                    button(type="submit" class='btn btn-danger')  Delete
+                         

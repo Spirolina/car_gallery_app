@@ -1,0 +1,49 @@
+extends layout 
+
+block content 
+    h4(class='text-center mt-3') #{title}
+    hr
+
+    div(class='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 container')
+     each car in cars 
+              div(class='col')
+                div(class='card')
+                  div(class='card-header')
+                   a(href=car.url) #{car.title}
+                  if (car.img.length != 0) 
+                   div(id='car'+car._id class="carousel slide" data-bs-ride="carousel")
+                      div(class="carousel-inner")
+                        each img, key  in car.img
+                         if key == 0 
+                          div(class="carousel-item active")
+                            img(
+                              class='w-100'
+                              src=`data:${img.contentType};base64,${img.data.toString('base64')}`)
+                         else 
+                           div(class="carousel-item")
+                            img(src=`data:${img.contentType};base64,${img.data.toString('base64')}`
+                                class='w-100'
+                            ) 
+                      button(class="carousel-control-prev" type="button" data-bs-target=`#car${car._id}` data-bs-slide="prev")
+                          span(class="carousel-control-prev-icon" aria-hidden="true")
+                          span(class="visually-hidden")
+                      button(class="carousel-control-next" type="button" data-bs-target=`#car${car._id}` data-bs-slide="next")
+                          span(class="carousel-control-next-icon" aria-hidden="true")
+                          span(class="visually-hidden")
+                  else 
+                    p no image
+                  div(class='card-body')
+                    h5 Number Plate: #{car.number_plate}
+                        
+                    h5 Brand: 
+                        a(href=car.brand.url) #{car.brand.title}
+                    ul(class='list-group') 
+                        li(class='list-group-item card-header') 
+                                h4 Car types
+                        each carType in car.type 
+                            
+                            li(class='list-group-item') 
+                                a(href=carType.url)  #{carType.title}
+
+               
+                

@@ -1,0 +1,21 @@
+extends layout 
+
+block content 
+    h1(class='text-center') #{title}
+    hr
+    div(class='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 container')    
+        each brand in brands
+                div(class='col')
+                    div(class='card bg-dark text-white h-100 ')
+                        if (brand.img.data)
+                            img(class='w-100 m-auto' src=`data:${brand.img.contentType};base64,${brand.img.data.toString('base64')}`)  
+                            div(class="card-img-overlay  bg-dark opacity-75")
+                                h5(class='card-title') 
+                                     a(href=brand.url class='text-white') #{brand.title}
+                        else
+                            img(class='w-100' src='../images/bmw.png')
+                            div(class="card-img-overlay  bg-dark opacity-75")
+                                h5(class='card-title')
+                                    a(href=brand.url class='text-white') #{brand.title}
+        else 
+            p there is no brand

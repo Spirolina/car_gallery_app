@@ -1,0 +1,11 @@
+extends layout
+
+block content 
+    form(action='' method='POST'
+            enctype='multipart/form-data'
+    )
+        input(type="text" id="name" placeholder="Name" 
+                       value="" name="name" required)
+        input(type="file" id="image" 
+                       name="image" value="" required)
+        button(type="submit") submit

@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+    h1(class='text-center') #{title}
+    hr
+    
+    form(action="", method="post") 
+        div(class='card text-center')
+            div(class='card-body')
+                h5(class='card-title') Deleting Car 
+                p(class='card-text') Are you sure about deleting #{car.title} : #{car.number_plate}
+                button(type="submit" class='btn btn-danger')  Delete

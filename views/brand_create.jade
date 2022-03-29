@@ -1,0 +1,20 @@
+extends layout 
+
+block content 
+    h1(class='text-center') #{title}
+    hr
+    form(class='w-50 m-auto d-grid gap-2' enctype="multipart/form-data" action="" method='post')
+        div(class="input-group flex-nowrap")
+            span(class="input-group-text" id="addon-wrapping") Brand Name
+            if brand
+                input(type="text" value=brand.title required class="form-control" name='brand' placeholder="Ford,Mercedes,etc.." aria-label="Brand Name" aria-describedby="addon-wrapping")
+            else
+                input(type="text" required class="form-control" name='brand' placeholder="Ford,Mercedes,etc.." aria-label="Brand Name" aria-describedby="addon-wrapping")
+        div(class="input-group")
+            label(class='input-group-text' for='logo') Select Logo
+            input(type="file" class='form-control' aria-label="Upload" id="logo", name='logo' accept='image/*') 
+        button(class="btn block btn-primary") Submit       
+        if errors
+          ul
+          each error in errors 
+             li #{error.msg}

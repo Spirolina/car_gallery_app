@@ -1,0 +1,20 @@
+extends layout 
+
+block content   
+    h1 #{title} :
+        a(href=brand.url) #{brand.title}
+    hr
+    if cars.length != 0
+        p First you need to delete cars related to this brand 
+        h5 Brands' Cars
+        ul(class="list-group list-group-flush")
+        each car in cars 
+            li(class="list-group-item") 
+                a(href=car.url) #{car.title}    
+    else
+        form(action="", method="post") 
+            div(class='card text-center')
+                div(class='card-body')
+                    h5(class='card-title') Deleting Brand 
+                    p(class='card-text') Are you sure about deleting #{brand.title}
+                    button(type="submit" class='btn btn-danger')  Delete

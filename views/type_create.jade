@@ -1,0 +1,22 @@
+extends layout 
+block content 
+    h1(class='text-center') #{title}
+    hr
+    form(class='w-50 m-auto d-grid gap-2'  action="" method='post')
+        div(class="input-group flex-nowrap")
+            span(class="input-group-text" id="addon-wrapping") Type Name
+            if carType
+                input(type="text" value=carType.title required class="form-control" name='type'  placeholder="SUV,Sport,Comfort, etc..." aria-label="Type Name" aria-describedby="addon-wrapping")
+            else    
+                input(type="text" required class="form-control" name='type'  placeholder="SUV,Sport,Comfort, etc..." aria-label="Type Name" aria-describedby="addon-wrapping")    
+        div(class='input-group')
+            span(class="input-group-text") Features of Type
+            if carType   
+                textarea(class="form-control" name='features' aria-label="With textarea") #{carType.features}
+            else    
+                textarea(class="form-control" name='features' aria-label="With textarea")
+        button(class="btn block btn-primary") Submit
+        if errors
+          ul
+          each error in errors 
+             li #{error.msg}

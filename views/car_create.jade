@@ -1,0 +1,61 @@
+extends layout 
+
+block content
+    h1(class='text-center') #{title}
+    hr
+    form(class='w-50 m-auto d-grid gap-2' enctype="multipart/form-data" action="" method='post')
+        div(class="input-group flex-nowrap")
+            span(class="input-group-text" id="addon-wrapping") Number Plate
+            if car
+                input(type="text" required class="form-control" name='number_plate' value=car.number_plate placeholder="XX-YYY-ZZZ" aria-label="Number Plate" aria-describedby="addon-wrapping")
+            else
+                input(type="text" required class="form-control" name='number_plate' placeholder="XX-YYY-ZZZ" aria-label="Number Plate" aria-describedby="addon-wrapping")
+        
+        select(class="form-select" required name='brand' aria-label="Default select example")
+                option(value='no_brand') Select a Brand 
+                each brand in brands
+                  if car
+                    if (brand._id.toString() === car.brand._id.toString())  
+                        option(selected=true value=brand._id) #{brand.title}
+                    else 
+                        option(value=brand._id) #{brand.title}     
+                  else
+                        option(value=brand._id) #{brand.title}   
+        
+        if car    
+            each carType, key in types
+             div(class='form-check')   
+                    input(class="form-check-input" type="checkbox" name='type' checked=carType.checked value=carType._id id=carType._id)
+                    label(class="form-check-label" for=carType._id) #{carType.title}
+        else 
+            each carType, key in types
+             div(class='form-check')   
+                    input(class="form-check-input" type="checkbox" name='type' value=carType._id id=carType._id)
+                    label(class="form-check-label" for=carType._id) #{carType.title}                          
+                
+                        
+                
+        
+        div(class="input-group flex-nowrap")
+            span(class="input-group-text" id="addon-wrapping") Model
+            if car
+                input(type="text" class="form-control" required name='model' placeholder="fiesta, focus, etc" value=car.model aria-label="model" aria-describedby="addon-wrapping")
+            else 
+                input(type="text" class="form-control" required name='model' placeholder="fiesta, focus, etc" aria-label="model" aria-describedby="addon-wrapping")
+        div(class="input-group flex-nowrap")
+            span(class="input-group-text" id="addon-wrapping") Year
+            if car    
+                input(type="text" class="form-control" name='year' required placeholder="2015, 2017, etc" aria-label="year" value=car.year aria-describedby="addon-wrapping")
+            else 
+                input(type="text" class="form-control" name='year' required placeholder="2015, 2017, etc" aria-label="year" aria-describedby="addon-wrapping") 
+        div(class="input-group")
+            label(class='input-group-text' for='images') select images
+            input(type="file" class='form-control' aria-label="Upload" id="images", name='images' multiple accept='image/*')
+        hr
+        button(class="btn block btn-primary") Submit
+        if errors
+          ul
+          each error in errors 
+             li #{error.msg}
+        
+            

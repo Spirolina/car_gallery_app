@@ -1,0 +1,27 @@
+extends layout 
+
+block content
+    h1(class='text-center') #{title}
+    hr
+    div(class='card bg-dark h-75 text-white d-flex justify-content-center')
+                        if (brand.img.data)
+                            img(class='card-img d-block w-25 m-auto' src=`data:${brand.img.contentType};base64,${brand.img.data.toString('base64')}`)  
+                            div(class="card-img-overlay")
+                                h5(class='card-title') 
+                                     a(href=brand.url class='text-white') #{brand.title}
+                        else
+                            img(class='card-img d-block w-25 m-auto' src='../../images/bmw.png')
+                            div(class="card-img-overlay")
+                                h5(class='card-title')
+                                    a(href=brand.url class='text-white') #{brand.title}
+    a(class='btn btn-warning w-100 mt-1' href=brand.url + '/edit') Edit
+    a(class='btn btn-danger w-100 mt-1' href=brand.url + '/delete') Delete
+    hr
+    if cars.length != 0 
+        h5 Brands' Cars
+        ul(class="list-group list-group-flush")
+        each car in cars 
+            li(class="list-group-item") 
+                a(href=car.url) #{car.title}
+    else 
+        p There is no car            

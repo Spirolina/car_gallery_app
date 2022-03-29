@@ -1,0 +1,26 @@
+extends layout 
+
+block content 
+    h1 #{title}
+    hr
+    div(class='card bg-light text-dark')
+        div(class='card-header') Car Type
+        div(class='card-body')
+            h5(class='card-title') 
+                a(href=type.url) #{type.title}
+            if type.features 
+                p(class='card-text')  #{type.features}
+            else 
+                p(class='card-text')  There is no explanation about car Type
+    a(class='btn btn-warning w-100 mt-1' href=type.url + '/edit') Edit
+    a(class='btn btn-danger mt-1 w-100' href=type.url+'/delete') Delete
+    hr
+    if cars             
+        h4 Types' Cars 
+        hr
+        ul(class="list-group list-group-flush")
+    each car in cars 
+        li(class="list-group-item") 
+            a(href=car.url) #{car.title}
+    else 
+        p there is no car   

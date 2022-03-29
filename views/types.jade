@@ -1,0 +1,20 @@
+extends layout 
+
+block content 
+    h1(class='text-center') #{title}
+    hr
+    div(class='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 container')    
+        each carType in types
+                div(class='col')
+                    div(class='card bg-light text-dark')
+                        div(class='card-header') Car Type
+                        div(class='card-body')
+                            h5(class='card-title') 
+                                a(href=carType.url) #{carType.title}
+                            if carType.features 
+                                p(class='card-text')  #{carType.features}
+                            else 
+                                p(class='card-text')  There is no explanation about car Type
+
+        else 
+            p there is no type
